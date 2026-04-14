@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luyện Thi Tiếng Anh Vào Lớp 10</title>
+<style>
+:root {
+  --primary: #667eea;
+  --primary-dark: #764ba2;
+  --accent: #f093fb;
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --shadow: 0 4px 15px rgba(0,0,0,0.1);
+  --text: #2d3748;
+  --text-light: #718096;
+  --success: #48bb78;
+  --error: #fc8181;
+  --warning: #f6e05e;
+  --radius: 12px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #1a202c; --card: #2d3748; --text: #e2e8f0; --text-light: #a0aec0;
+  --shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
+a { color: var(--primary); text-decoration: none; }
+.header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; padding: 24px 20px; text-align: center; }
+.header h1 { font-size: 22px; margin-bottom: 4px; }
+.header p { font-size: 14px; opacity: 0.9; }
+.nav { background: var(--card); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; display: flex; justify-content: center; gap: 0; flex-wrap: wrap; }
+.nav a { padding: 12px 16px; font-size: 14px; color: var(--text); transition: .3s; border-bottom: 3px solid transparent; white-space: nowrap; }
+.nav a:hover, .nav a.active { border-bottom-color: var(--primary); color: var(--primary); background: rgba(102,126,234,0.05); }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 20px; transition: transform .3s, box-shadow .3s; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+.btn { display: inline-block; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; transition: .3s; }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-success { background: var(--success); color: #fff; }
+.btn-danger { background: var(--error); color: #fff; }
+.btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+.progress-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin: 8px 0; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width .5s; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.badge-success { background: #c6f6d5; color: #276749; }
+.badge-warning { background: #fefcbf; color: #975a16; }
+.badge-info { background: #bee3f8; color: #2a4365; }
+.footer { text-align: center; padding: 20px; color: var(--text-light); font-size: 13px; margin-top: 40px; border-top: 1px solid #e2e8f0; }
+.breadcrumb { padding: 12px 0; font-size: 14px; color: var(--text-light); }
+.breadcrumb a { color: var(--primary); }
+.toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; border-radius: 8px; color: #fff; z-index: 9999; animation: slideIn .3s; font-size: 14px; }
+.toast-success { background: var(--success); }
+.toast-error { background: var(--error); }
+@keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.dark-toggle { position: fixed; bottom: 20px; left: 20px; width: 44px; height: 44px; border-radius: 50%; background: var(--card); box-shadow: var(--shadow); border: none; cursor: pointer; font-size: 20px; z-index: 999; display: flex; align-items: center; justify-content: center; }
+.quiz-option { display: block; padding: 12px 16px; margin: 6px 0; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: .2s; font-size: 16px; }
+.quiz-option:hover { border-color: var(--primary); background: rgba(102,126,234,0.05); }
+.quiz-option.selected { border-color: var(--primary); background: rgba(102,126,234,0.1); }
+.quiz-option.correct { border-color: var(--success); background: #f0fff4; }
+.quiz-option.wrong { border-color: var(--error); background: #fff5f5; }
+.question-nav { display: flex; flex-wrap: wrap; gap: 4px; padding: 10px 0; position: sticky; top: 48px; background: var(--bg); z-index: 50; }
+.q-nav-btn { width: 32px; height: 32px; border: 2px solid #e2e8f0; border-radius: 6px; background: var(--card); cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: .2s; }
+.q-nav-btn.answered { background: #e2e8f0; }
+.q-nav-btn.current { border-color: var(--primary); color: var(--primary); font-weight: 700; }
+.timer { font-size: 24px; font-weight: 700; color: var(--primary); text-align: center; padding: 10px; }
+.timer.warning { color: var(--error); animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0.5; } }
+.tab-bar { display: flex; border-bottom: 2px solid #e2e8f0; margin-bottom: 20px; }
+.tab-btn { padding: 10px 20px; cursor: pointer; border: none; background: none; font-size: 14px; font-weight: 600; color: var(--text-light); border-bottom: 3px solid transparent; transition: .2s; }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+.flashcard { perspective: 1000px; margin: 20px auto; max-width: 400px; }
+.flashcard-inner { position: relative; width: 100%; min-height: 250px; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back { position: absolute; width: 100%; min-height: 250px; backface-visibility: hidden; border-radius: var(--radius); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; background: var(--card); }
+.flashcard-back { transform: rotateY(180deg); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; }
+.fill-input { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; margin: 6px 0; background: var(--card); color: var(--text); font-family: inherit; }
+.fill-input:disabled { opacity: 0.7; cursor: not-allowed; }
+textarea.fill-input { resize: vertical; min-height: 44px; line-height: 1.5; }
+.fill-question { line-height: 1.7; }
+.quiz-option.correct { background: #c6f6d5 !important; border-color: var(--success) !important; color: #276749 !important; font-weight: 600; }
+.quiz-option.wrong { background: #fed7d7 !important; border-color: var(--error) !important; color: #9b2c2c !important; text-decoration: line-through; }
+.result-box { padding: 20px; border-radius: var(--radius); text-align: center; margin: 20px 0; }
+.result-box.good { background: #f0fff4; border: 2px solid var(--success); }
+.result-box.bad { background: #fff5f5; border: 2px solid var(--error); }
+.exam-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.exam-btn { padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; background: var(--card); cursor: pointer; text-align: center; font-size: 13px; transition: .2s; }
+.exam-btn:hover { border-color: var(--primary); }
+.exam-btn.done { border-color: var(--success); background: #f0fff4; }
+.exam-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+.search-box { width: 100%; padding: 10px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; margin-bottom: 15px; background: var(--card); color: var(--text); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+th { background: rgba(102,126,234,0.05); font-weight: 600; }
+tr:hover { background: rgba(102,126,234,0.03); }
+.ipa { color: var(--text-light); font-style: italic; }
+@media (max-width: 768px) {
+  .header h1 { font-size: 18px; }
+  .nav { justify-content: flex-start; overflow-x: auto; }
+  .nav a { padding: 10px 12px; font-size: 13px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .exam-grid { grid-template-columns: repeat(3, 1fr); }
+  .question-nav { overflow-x: auto; flex-wrap: nowrap; }
+  .container { padding: 12px; }
+  .card { padding: 16px; }
+}
+@media print {
+  .nav, .header, .footer, .btn, .dark-toggle, .question-nav, .timer { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #ddd; }
+}
+
+.hero { padding: 40px 20px; text-align: center; }
+.hero h2 { font-size: 28px; margin-bottom: 8px; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 30px 0; }
+.stat-card { background: var(--card); border-radius: var(--radius); padding: 20px; text-align: center; box-shadow: var(--shadow); }
+.stat-num { font-size: 36px; font-weight: 800; background: linear-gradient(135deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+.unit-item { padding: 6px 12px; font-size: 13px; border-bottom: 1px solid #eee; }
+.cd-tag { display: inline-block; padding: 3px 10px; margin: 3px; background: rgba(102,126,234,0.1); border-radius: 6px; font-size: 12px; }
+.module-icon { font-size: 48px; margin-bottom: 12px; }
+.module-title { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.module-desc { font-size: 14px; color: var(--text-light); margin-bottom: 16px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>🎓 LUYỆN THI TIẾNG ANH VÀO LỚP 10</h1>
+  <p>Ôn tập toàn diện — Từ vựng • Ngữ pháp • Đề thi</p>
+</div>
+<div class="nav">
+  <a href="index.html" class="active">🏠 Trang chủ</a>
+  <a href="tu-vung.html">📚 Từ vựng</a>
+  <a href="chuyen-de.html">📝 16 Chuyên đề</a>
+  <a href="de-thi.html">📋 50 Đề thi</a>
+</div>
+<div class="container">
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-num" id="statVocab">0</div>
+      <div class="stat-label">/265 từ đã thuộc</div>
+      <div class="progress-bar"><div class="progress-fill" id="pVocab" style="width:0%"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statCD">0</div>
+      <div class="stat-label">/16 chuyên đề hoàn thành</div>
+      <div class="progress-bar"><div class="progress-fill" id="pCD" style="width:0%"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statExam">0</div>
+      <div class="stat-label">/50 đề thi đã làm</div>
+      <div class="progress-bar"><div class="progress-fill" id="pExam" style="width:0%"></div></div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statAvg">-</div>
+      <div class="stat-label">Điểm TB đề thi</div>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <div class="module-icon">📚</div>
+      <div class="module-title">Từ Vựng 12 Unit</div>
+      <div class="module-desc">Học từ mới theo sách Global Success lớp 9. Flashcard, quiz, và ôn tập.</div>
+      <a href="tu-vung.html" class="btn btn-primary" style="width:100%;text-align:center;display:block">BẮT ĐẦU HỌC</a>
+      <div style="margin-top:16px;max-height:200px;overflow-y:auto">
+        <div class="unit-item">Unit 1: Local Community <span class="badge badge-info">25 từ</span></div><div class="unit-item">Unit 2: City Life <span class="badge badge-info">21 từ</span></div><div class="unit-item">Unit 3: Healthy Living for Teens <span class="badge badge-info">19 từ</span></div><div class="unit-item">Unit 4: Remembering the Past <span class="badge badge-info">21 từ</span></div><div class="unit-item">Unit 5: Our Experiences <span class="badge badge-info">24 từ</span></div><div class="unit-item">Unit 6: Vietnamese Lifestyle: Then and Now <span class="badge badge-info">21 từ</span></div><div class="unit-item">Unit 7: Natural Wonders of the World <span class="badge badge-info">21 từ</span></div><div class="unit-item">Unit 8: Tourism <span class="badge badge-info">24 từ</span></div><div class="unit-item">Unit 9: World Englishes <span class="badge badge-info">25 từ</span></div><div class="unit-item">Unit 10: Planet Earth <span class="badge badge-info">22 từ</span></div><div class="unit-item">Unit 11: Electronic Devices <span class="badge badge-info">21 từ</span></div><div class="unit-item">Unit 12: Career Choices <span class="badge badge-info">21 từ</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="module-icon">📝</div>
+      <div class="module-title">16 Chuyên Đề Ngữ Pháp</div>
+      <div class="module-desc">Luyện tập trọng tâm 16 chuyên đề ngữ pháp - từ vựng. Mỗi đề ~50 câu.</div>
+      <a href="chuyen-de.html" class="btn btn-primary" style="width:100%;text-align:center;display:block">LUYỆN TẬP</a>
+      <div style="margin-top:16px;line-height:2">
+        <span class="cd-tag">1. NGỮ ÂM</span><span class="cd-tag">2. CÁC THÌ</span><span class="cd-tag">3. BỊ ĐỘNG</span><span class="cd-tag">4. CÂU ĐIỀU KIỆN</span><span class="cd-tag">5. CÂU GIÁN TIẾP</span><span class="cd-tag">6. MỆNH ĐỀ QUAN HỆ</span><span class="cd-tag">7. MỆNH ĐỀ CHỈ NGUYÊN NHÂN</span><span class="cd-tag">8. MỆNH ĐỀ CHỈ KẾT QUẢ</span><span class="cd-tag">9. MỆNH ĐỀ CHỈ TƯƠNG PHẢN</span><span class="cd-tag">10. MỆNH ĐỀ CHỈ MỤC ĐÍCH</span><span class="cd-tag">11. ĐỘNG TỪ KHUYẾT THIẾU</span><span class="cd-tag">12. GIỚI TỪ + MẠO TỪ</span><span class="cd-tag">13. TỪ LOẠI</span><span class="cd-tag">14. DẠNG ĐỘNG TỪ</span><span class="cd-tag">15. TÌM VÀ SỬA LỖI SAI</span><span class="cd-tag">16. TỪ VỰNG</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="module-icon">📋</div>
+      <div class="module-title">50 Đề Thi Thử</div>
+      <div class="module-desc">Đề thi thật Sở GD&ĐT Thanh Hóa. Thi thử 60 phút, chấm điểm tự động.</div>
+      <a href="de-thi.html" class="btn btn-primary" style="width:100%;text-align:center;display:block">THI THỬ</a>
+      <div class="exam-grid" style="margin-top:16px">
+        <a href="de-thi.html?de=1" class="exam-btn">Đề 1</a><a href="de-thi.html?de=2" class="exam-btn">Đề 2</a><a href="de-thi.html?de=3" class="exam-btn">Đề 3</a><a href="de-thi.html?de=4" class="exam-btn">Đề 4</a><a href="de-thi.html?de=5" class="exam-btn">Đề 5</a><a href="de-thi.html?de=6" class="exam-btn">Đề 6</a><a href="de-thi.html?de=7" class="exam-btn">Đề 7</a><a href="de-thi.html?de=8" class="exam-btn">Đề 8</a><a href="de-thi.html?de=9" class="exam-btn">Đề 9</a><a href="de-thi.html?de=10" class="exam-btn">Đề 10</a><a href="de-thi.html?de=11" class="exam-btn">Đề 11</a><a href="de-thi.html?de=12" class="exam-btn">Đề 12</a><a href="de-thi.html?de=13" class="exam-btn">Đề 13</a><a href="de-thi.html?de=14" class="exam-btn">Đề 14</a><a href="de-thi.html?de=15" class="exam-btn">Đề 15</a><a href="de-thi.html?de=16" class="exam-btn">Đề 16</a><a href="de-thi.html?de=17" class="exam-btn">Đề 17</a><a href="de-thi.html?de=18" class="exam-btn">Đề 18</a><a href="de-thi.html?de=19" class="exam-btn">Đề 19</a><a href="de-thi.html?de=20" class="exam-btn">Đề 20</a><a href="de-thi.html?de=21" class="exam-btn">Đề 21</a><a href="de-thi.html?de=22" class="exam-btn">Đề 22</a><a href="de-thi.html?de=23" class="exam-btn">Đề 23</a><a href="de-thi.html?de=24" class="exam-btn">Đề 24</a><a href="de-thi.html?de=25" class="exam-btn">Đề 25</a><a href="de-thi.html?de=26" class="exam-btn">Đề 26</a><a href="de-thi.html?de=27" class="exam-btn">Đề 27</a><a href="de-thi.html?de=28" class="exam-btn">Đề 28</a><a href="de-thi.html?de=29" class="exam-btn">Đề 29</a><a href="de-thi.html?de=30" class="exam-btn">Đề 30</a><a href="de-thi.html?de=31" class="exam-btn">Đề 31</a><a href="de-thi.html?de=32" class="exam-btn">Đề 32</a><a href="de-thi.html?de=33" class="exam-btn">Đề 33</a><a href="de-thi.html?de=34" class="exam-btn">Đề 34</a><a href="de-thi.html?de=35" class="exam-btn">Đề 35</a><a href="de-thi.html?de=36" class="exam-btn">Đề 36</a><a href="de-thi.html?de=37" class="exam-btn">Đề 37</a><a href="de-thi.html?de=38" class="exam-btn">Đề 38</a><a href="de-thi.html?de=39" class="exam-btn">Đề 39</a><a href="de-thi.html?de=40" class="exam-btn">Đề 40</a><a href="de-thi.html?de=41" class="exam-btn">Đề 41</a><a href="de-thi.html?de=42" class="exam-btn">Đề 42</a><a href="de-thi.html?de=43" class="exam-btn">Đề 43</a><a href="de-thi.html?de=44" class="exam-btn">Đề 44</a><a href="de-thi.html?de=45" class="exam-btn">Đề 45</a><a href="de-thi.html?de=46" class="exam-btn">Đề 46</a><a href="de-thi.html?de=47" class="exam-btn">Đề 47</a><a href="de-thi.html?de=48" class="exam-btn">Đề 48</a><a href="de-thi.html?de=49" class="exam-btn">Đề 49</a><a href="de-thi.html?de=50" class="exam-btn">Đề 50</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="suggestions" style="margin-top:20px">
+    <h3 style="margin-bottom:12px">💡 Gợi ý học tập</h3>
+    <div id="suggestContent"></div>
+  </div>
+</div>
+<div class="footer">
+  Luyện thi Tiếng Anh vào lớp 10 — Tài liệu tổng hợp © 2026<br>
+  <button class="btn btn-outline" style="margin-top:10px;font-size:12px" onclick="SM.resetAll()">🗑 Xóa dữ liệu lưu</button>
+</div>
+<button class="dark-toggle" onclick="toggleTheme()" title="Chế độ tối">🌓</button>
+<script>
+const SM = {
+  save(k,d) { try { localStorage.setItem(k, JSON.stringify(d)); } catch(e) { console.warn('Storage full'); } },
+  load(k,def) { try { const d = localStorage.getItem(k); return d ? JSON.parse(d) : def; } catch(e) { return def; } },
+  remove(k) { localStorage.removeItem(k); },
+  saveResult(mod, id, score, total, answers) {
+    const results = this.load('results_' + mod, {});
+    results[id] = { score, total, answers, date: new Date().toISOString() };
+    this.save('results_' + mod, results);
+  },
+  getResult(mod, id) { return (this.load('results_' + mod, {}))[id]; },
+  getAllResults(mod) { return this.load('results_' + mod, {}); },
+  getAvgScore(mod) {
+    const r = this.getAllResults(mod);
+    const vals = Object.values(r);
+    if (!vals.length) return 0;
+    return vals.reduce((s, v) => s + (v.score / v.total * 100), 0) / vals.length;
+  },
+  getCount(mod) { return Object.keys(this.getAllResults(mod)).length; },
+  saveVocabKnown(unit, wordId) {
+    const known = this.load('vocab_known', {});
+    if (!known[unit]) known[unit] = [];
+    if (!known[unit].includes(wordId)) known[unit].push(wordId);
+    this.save('vocab_known', known);
+  },
+  isVocabKnown(unit, wordId) {
+    const known = this.load('vocab_known', {});
+    return known[unit] && known[unit].includes(wordId);
+  },
+  getVocabKnownCount(unit) {
+    const known = this.load('vocab_known', {});
+    return known[unit] ? known[unit].length : 0;
+  },
+  getTotalVocabKnown() {
+    const known = this.load('vocab_known', {});
+    return Object.values(known).reduce((s, arr) => s + arr.length, 0);
+  },
+  resetAll() { if(confirm('Xóa toàn bộ dữ liệu lưu?')) { localStorage.clear(); location.reload(); } }
+};
+
+function showToast(msg, type='success') {
+  const t = document.createElement('div');
+  t.className = 'toast toast-' + type;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function initTheme() {
+  const theme = SM.load('theme', 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  SM.save('theme', next);
+}
+initTheme();
+
+class Timer {
+  constructor(display, onComplete) {
+    this.display = display;
+    this.onComplete = onComplete;
+    this.remaining = 0;
+    this.interval = null;
+    this.running = false;
+  }
+  start(minutes) {
+    this.remaining = minutes * 60;
+    this.running = true;
+    this.tick();
+    this.interval = setInterval(() => this.tick(), 1000);
+  }
+  tick() {
+    if (this.remaining <= 0) {
+      this.stop();
+      if (this.onComplete) this.onComplete();
+      return;
+    }
+    const m = Math.floor(this.remaining / 60);
+    const s = this.remaining % 60;
+    this.display.textContent = '⏱ ' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (this.remaining <= 300) this.display.classList.add('warning');
+    this.remaining--;
+  }
+  stop() { clearInterval(this.interval); this.running = false; }
+  getElapsed(totalMinutes) {
+    const elapsed = totalMinutes * 60 - this.remaining;
+    return Math.floor(elapsed / 60) + ' phút ' + (elapsed % 60) + ' giây';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const vocabKnown = SM.getTotalVocabKnown();
+  const cdCount = SM.getCount('cd');
+  const examCount = SM.getCount('exam');
+  const examAvg = SM.getAvgScore('exam');
+  
+  document.getElementById('statVocab').textContent = vocabKnown;
+  document.getElementById('statCD').textContent = cdCount;
+  document.getElementById('statExam').textContent = examCount;
+  document.getElementById('statAvg').textContent = examCount > 0 ? examAvg.toFixed(1) + '%' : '-';
+  
+  document.getElementById('pVocab').style.width = (vocabKnown/265*100) + '%';
+  document.getElementById('pCD').style.width = (cdCount/16*100) + '%';
+  document.getElementById('pExam').style.width = (examCount/50*100) + '%';
+  
+  // Suggestions
+  const suggestions = [];
+  if (vocabKnown < 50) suggestions.push('📚 Bạn mới thuộc ' + vocabKnown + ' từ. Hãy bắt đầu học từ vựng Unit 1!');
+  if (cdCount < 5) suggestions.push('📝 Hãy luyện thêm chuyên đề để nắm vững ngữ pháp.');
+  if (examCount === 0) suggestions.push('📋 Chưa làm đề thi nào. Thử sức với Đề 1 nhé!');
+  else if (examCount < 50) suggestions.push('📋 Đã làm ' + examCount + '/50 đề. Tiếp tục với Đề ' + (examCount+1) + '!');
+  if (examAvg > 0 && examAvg < 60) suggestions.push('⚠️ Điểm chưa cao. Nên ôn lại các chuyên đề yếu.');
+  if (suggestions.length === 0) suggestions.push('🎉 Tuyệt vời! Hãy tiếp tục ôn tập đều đặn.');
+  document.getElementById('suggestContent').innerHTML = suggestions.map(s => '<p style="padding:6px 0">' + s + '</p>').join('');
+});
+</script>
+</body>
+</html>

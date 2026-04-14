@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Từ Vựng 12 Unit — Luyện Thi Tiếng Anh Lớp 10</title>
+<style>
+:root {
+  --primary: #667eea;
+  --primary-dark: #764ba2;
+  --accent: #f093fb;
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --shadow: 0 4px 15px rgba(0,0,0,0.1);
+  --text: #2d3748;
+  --text-light: #718096;
+  --success: #48bb78;
+  --error: #fc8181;
+  --warning: #f6e05e;
+  --radius: 12px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+[data-theme="dark"] {
+  --bg: #1a202c; --card: #2d3748; --text: #e2e8f0; --text-light: #a0aec0;
+  --shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.7; font-size: 16px; }
+a { color: var(--primary); text-decoration: none; }
+.header { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; padding: 24px 20px; text-align: center; }
+.header h1 { font-size: 22px; margin-bottom: 4px; }
+.header p { font-size: 14px; opacity: 0.9; }
+.nav { background: var(--card); box-shadow: var(--shadow); position: sticky; top: 0; z-index: 100; display: flex; justify-content: center; gap: 0; flex-wrap: wrap; }
+.nav a { padding: 12px 16px; font-size: 14px; color: var(--text); transition: .3s; border-bottom: 3px solid transparent; white-space: nowrap; }
+.nav a:hover, .nav a.active { border-bottom-color: var(--primary); color: var(--primary); background: rgba(102,126,234,0.05); }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 20px; transition: transform .3s, box-shadow .3s; }
+.card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+.btn { display: inline-block; padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; font-weight: 600; transition: .3s; }
+.btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-success { background: var(--success); color: #fff; }
+.btn-danger { background: var(--error); color: #fff; }
+.btn-outline { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+.progress-bar { height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin: 8px 0; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width .5s; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.badge-success { background: #c6f6d5; color: #276749; }
+.badge-warning { background: #fefcbf; color: #975a16; }
+.badge-info { background: #bee3f8; color: #2a4365; }
+.footer { text-align: center; padding: 20px; color: var(--text-light); font-size: 13px; margin-top: 40px; border-top: 1px solid #e2e8f0; }
+.breadcrumb { padding: 12px 0; font-size: 14px; color: var(--text-light); }
+.breadcrumb a { color: var(--primary); }
+.toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 24px; border-radius: 8px; color: #fff; z-index: 9999; animation: slideIn .3s; font-size: 14px; }
+.toast-success { background: var(--success); }
+.toast-error { background: var(--error); }
+@keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+.dark-toggle { position: fixed; bottom: 20px; left: 20px; width: 44px; height: 44px; border-radius: 50%; background: var(--card); box-shadow: var(--shadow); border: none; cursor: pointer; font-size: 20px; z-index: 999; display: flex; align-items: center; justify-content: center; }
+.quiz-option { display: block; padding: 12px 16px; margin: 6px 0; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: .2s; font-size: 16px; }
+.quiz-option:hover { border-color: var(--primary); background: rgba(102,126,234,0.05); }
+.quiz-option.selected { border-color: var(--primary); background: rgba(102,126,234,0.1); }
+.quiz-option.correct { border-color: var(--success); background: #f0fff4; }
+.quiz-option.wrong { border-color: var(--error); background: #fff5f5; }
+.question-nav { display: flex; flex-wrap: wrap; gap: 4px; padding: 10px 0; position: sticky; top: 48px; background: var(--bg); z-index: 50; }
+.q-nav-btn { width: 32px; height: 32px; border: 2px solid #e2e8f0; border-radius: 6px; background: var(--card); cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center; transition: .2s; }
+.q-nav-btn.answered { background: #e2e8f0; }
+.q-nav-btn.current { border-color: var(--primary); color: var(--primary); font-weight: 700; }
+.timer { font-size: 24px; font-weight: 700; color: var(--primary); text-align: center; padding: 10px; }
+.timer.warning { color: var(--error); animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0.5; } }
+.tab-bar { display: flex; border-bottom: 2px solid #e2e8f0; margin-bottom: 20px; }
+.tab-btn { padding: 10px 20px; cursor: pointer; border: none; background: none; font-size: 14px; font-weight: 600; color: var(--text-light); border-bottom: 3px solid transparent; transition: .2s; }
+.tab-btn.active { color: var(--primary); border-bottom-color: var(--primary); }
+.flashcard { perspective: 1000px; margin: 20px auto; max-width: 400px; }
+.flashcard-inner { position: relative; width: 100%; min-height: 250px; transition: transform 0.6s; transform-style: preserve-3d; cursor: pointer; }
+.flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+.flashcard-front, .flashcard-back { position: absolute; width: 100%; min-height: 250px; backface-visibility: hidden; border-radius: var(--radius); box-shadow: var(--shadow); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; background: var(--card); }
+.flashcard-back { transform: rotateY(180deg); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; }
+.fill-input { width: 100%; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; margin: 6px 0; background: var(--card); color: var(--text); font-family: inherit; }
+.fill-input:disabled { opacity: 0.7; cursor: not-allowed; }
+textarea.fill-input { resize: vertical; min-height: 44px; line-height: 1.5; }
+.fill-question { line-height: 1.7; }
+.quiz-option.correct { background: #c6f6d5 !important; border-color: var(--success) !important; color: #276749 !important; font-weight: 600; }
+.quiz-option.wrong { background: #fed7d7 !important; border-color: var(--error) !important; color: #9b2c2c !important; text-decoration: line-through; }
+.result-box { padding: 20px; border-radius: var(--radius); text-align: center; margin: 20px 0; }
+.result-box.good { background: #f0fff4; border: 2px solid var(--success); }
+.result-box.bad { background: #fff5f5; border: 2px solid var(--error); }
+.exam-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.exam-btn { padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; background: var(--card); cursor: pointer; text-align: center; font-size: 13px; transition: .2s; }
+.exam-btn:hover { border-color: var(--primary); }
+.exam-btn.done { border-color: var(--success); background: #f0fff4; }
+.exam-btn.disabled { opacity: 0.5; cursor: not-allowed; }
+.search-box { width: 100%; padding: 10px 16px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px; margin-bottom: 15px; background: var(--card); color: var(--text); }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 14px; }
+th { background: rgba(102,126,234,0.05); font-weight: 600; }
+tr:hover { background: rgba(102,126,234,0.03); }
+.ipa { color: var(--text-light); font-style: italic; }
+@media (max-width: 768px) {
+  .header h1 { font-size: 18px; }
+  .nav { justify-content: flex-start; overflow-x: auto; }
+  .nav a { padding: 10px 12px; font-size: 13px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .exam-grid { grid-template-columns: repeat(3, 1fr); }
+  .question-nav { overflow-x: auto; flex-wrap: nowrap; }
+  .container { padding: 12px; }
+  .card { padding: 16px; }
+}
+@media print {
+  .nav, .header, .footer, .btn, .dark-toggle, .question-nav, .timer { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #ddd; }
+}
+
+.layout { display: flex; gap: 20px; }
+.sidebar { width: 260px; flex-shrink: 0; }
+.main { flex: 1; min-width: 0; }
+.unit-card { padding: 12px; margin-bottom: 8px; border-radius: 8px; cursor: pointer; background: var(--card); box-shadow: 0 1px 3px rgba(0,0,0,0.08); transition: .2s; border-left: 4px solid transparent; }
+.unit-card:hover, .unit-card.active { border-left-color: var(--primary); background: rgba(102,126,234,0.05); }
+.unit-card .unit-num { font-weight: 700; color: var(--primary); }
+.word-known { color: var(--success); font-weight: 700; }
+.fc-word { font-size: 32px; font-weight: 700; }
+.fc-ipa { font-size: 16px; color: var(--text-light); margin-top: 8px; }
+.fc-meaning { font-size: 24px; font-weight: 600; }
+.fc-type { font-size: 14px; opacity: 0.8; margin-top: 8px; }
+.fc-controls { display: flex; gap: 10px; justify-content: center; margin-top: 16px; flex-wrap: wrap; }
+.fc-counter { text-align: center; margin: 12px 0; font-size: 14px; color: var(--text-light); }
+@media (max-width: 768px) {
+  .layout { flex-direction: column; }
+  .sidebar { width: 100%; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📚 Từ Vựng 12 Unit</h1>
+  <p>Sách Global Success lớp 9</p>
+</div>
+<div class="nav">
+  <a href="index.html">🏠 Trang chủ</a>
+  <a href="tu-vung.html" class="active">📚 Từ vựng</a>
+  <a href="chuyen-de.html">📝 16 Chuyên đề</a>
+  <a href="de-thi.html">📋 50 Đề thi</a>
+</div>
+<div class="container">
+  <div class="breadcrumb"><a href="index.html">Trang chủ</a> › Từ vựng</div>
+  <div class="layout">
+    <div class="sidebar" id="sidebar"></div>
+    <div class="main">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="switchTab('list')">📋 Danh sách</button>
+        <button class="tab-btn" onclick="switchTab('flashcard')">🃏 Flashcard</button>
+        <button class="tab-btn" onclick="switchTab('quiz')">✍️ Quiz</button>
+      </div>
+      <input type="text" class="search-box" id="searchBox" placeholder="🔍 Tìm từ vựng..." oninput="filterWords()">
+      <div id="tabContent"></div>
+    </div>
+  </div>
+</div>
+<div class="footer">
+  <a href="index.html">← Quay lại trang chủ</a>
+</div>
+<button class="dark-toggle" onclick="toggleTheme()">🌓</button>
+<script>
+const SM = {
+  save(k,d) { try { localStorage.setItem(k, JSON.stringify(d)); } catch(e) { console.warn('Storage full'); } },
+  load(k,def) { try { const d = localStorage.getItem(k); return d ? JSON.parse(d) : def; } catch(e) { return def; } },
+  remove(k) { localStorage.removeItem(k); },
+  saveResult(mod, id, score, total, answers) {
+    const results = this.load('results_' + mod, {});
+    results[id] = { score, total, answers, date: new Date().toISOString() };
+    this.save('results_' + mod, results);
+  },
+  getResult(mod, id) { return (this.load('results_' + mod, {}))[id]; },
+  getAllResults(mod) { return this.load('results_' + mod, {}); },
+  getAvgScore(mod) {
+    const r = this.getAllResults(mod);
+    const vals = Object.values(r);
+    if (!vals.length) return 0;
+    return vals.reduce((s, v) => s + (v.score / v.total * 100), 0) / vals.length;
+  },
+  getCount(mod) { return Object.keys(this.getAllResults(mod)).length; },
+  saveVocabKnown(unit, wordId) {
+    const known = this.load('vocab_known', {});
+    if (!known[unit]) known[unit] = [];
+    if (!known[unit].includes(wordId)) known[unit].push(wordId);
+    this.save('vocab_known', known);
+  },
+  isVocabKnown(unit, wordId) {
+    const known = this.load('vocab_known', {});
+    return known[unit] && known[unit].includes(wordId);
+  },
+  getVocabKnownCount(unit) {
+    const known = this.load('vocab_known', {});
+    return known[unit] ? known[unit].length : 0;
+  },
+  getTotalVocabKnown() {
+    const known = this.load('vocab_known', {});
+    return Object.values(known).reduce((s, arr) => s + arr.length, 0);
+  },
+  resetAll() { if(confirm('Xóa toàn bộ dữ liệu lưu?')) { localStorage.clear(); location.reload(); } }
+};
+
+function showToast(msg, type='success') {
+  const t = document.createElement('div');
+  t.className = 'toast toast-' + type;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 3000);
+}
+
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function initTheme() {
+  const theme = SM.load('theme', 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+}
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  SM.save('theme', next);
+}
+initTheme();
+
+class Timer {
+  constructor(display, onComplete) {
+    this.display = display;
+    this.onComplete = onComplete;
+    this.remaining = 0;
+    this.interval = null;
+    this.running = false;
+  }
+  start(minutes) {
+    this.remaining = minutes * 60;
+    this.running = true;
+    this.tick();
+    this.interval = setInterval(() => this.tick(), 1000);
+  }
+  tick() {
+    if (this.remaining <= 0) {
+      this.stop();
+      if (this.onComplete) this.onComplete();
+      return;
+    }
+    const m = Math.floor(this.remaining / 60);
+    const s = this.remaining % 60;
+    this.display.textContent = '⏱ ' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (this.remaining <= 300) this.display.classList.add('warning');
+    this.remaining--;
+  }
+  stop() { clearInterval(this.interval); this.running = false; }
+  getElapsed(totalMinutes) {
+    const elapsed = totalMinutes * 60 - this.remaining;
+    return Math.floor(elapsed / 60) + ' phút ' + (elapsed % 60) + ' giây';
+  }
+}
+
+const DATA = {"unit1": {"title": "Local Community", "words": [{"id": 1, "word": "artisan", "type": "(n)", "ipa": "/ˌɑːtɪˈzæn/", "meaning": "thợ làm nghề thủ công"}, {"id": 2, "word": "community", "type": "(n)", "ipa": "/kəˈmjuːnəti/", "meaning": "cộng đồng"}, {"id": 3, "word": "community helper", "type": "(n)", "ipa": "/kəˈmjuːnəti ˈhelpə/", "meaning": "người phục vụ cộng đồng"}, {"id": 4, "word": "craft village", "type": "(n)", "ipa": "/krɑːft ˈvɪlɪdʒ/", "meaning": "làng nghề thủ công"}, {"id": 5, "word": "cut down on", "type": "", "ipa": "/kʌt daʊn ɒn/", "meaning": "cắt giảm"}, {"id": 6, "word": "delivery person", "type": "(n)", "ipa": "/dɪˈlɪvəri ˈpɜːsn/", "meaning": "nhân viên giao hàng"}, {"id": 7, "word": "electrician", "type": "(n)", "ipa": "/ɪˌlekˈtrɪʃn/", "meaning": "thợ điện"}, {"id": 8, "word": "facilities", "type": "(n, plural)", "ipa": "/fəˈsɪlətiz/", "meaning": "cơ sở vật chất"}, {"id": 9, "word": "firefighter", "type": "(n)", "ipa": "/ˈfaɪəfaɪtə/", "meaning": "lính cứu hỏa"}, {"id": 10, "word": "fragrance", "type": "(n)", "ipa": "/ˈfreɪɡrəns/", "meaning": "hương thơm"}, {"id": 11, "word": "function", "type": "(n)", "ipa": "/ˈfʌŋkʃn/", "meaning": "chức năng"}, {"id": 12, "word": "garbage collector", "type": "(n)", "ipa": "/ˈɡɑːbɪdʒ kəˌlektə/", "meaning": "nhân viên dọn vệ sinh"}, {"id": 13, "word": "get on with", "type": "", "ipa": "/ɡet ɒn wɪð/", "meaning": "có quan hệ tốt với"}, {"id": 14, "word": "hand down", "type": "", "ipa": "/hænd daʊn/", "meaning": "truyền lại"}, {"id": 15, "word": "handicraft", "type": "(n)", "ipa": "/ˈhændikrɑːft/", "meaning": "sản phẩm thủ công"}, {"id": 16, "word": "look around", "type": "", "ipa": "/lʊk əˈraʊnd/", "meaning": "ngắm nghía xung quanh"}, {"id": 17, "word": "original", "type": "(adj)", "ipa": "/əˈrɪdʒənl/", "meaning": "nguyên bản"}, {"id": 18, "word": "pass down", "type": "", "ipa": "/pɑːs daʊn/", "meaning": "truyền lại"}, {"id": 19, "word": "police officer", "type": "(n)", "ipa": "/pəˈliːs ˈɒfɪsə/", "meaning": "công an"}, {"id": 20, "word": "pottery", "type": "(n)", "ipa": "/ˈpɒtəri/", "meaning": "đồ gốm"}, {"id": 21, "word": "preserve", "type": "(v)", "ipa": "/prɪˈzɜːv/", "meaning": "bảo tồn"}, {"id": 22, "word": "run out of", "type": "", "ipa": "/rʌn aʊt əv/", "meaning": "hết, cạn kiệt"}, {"id": 23, "word": "speciality", "type": "(n)", "ipa": "/ˌspeʃiˈæləti/", "meaning": "đặc sản"}, {"id": 24, "word": "suburb", "type": "(n)", "ipa": "/ˈsʌbɜːb/", "meaning": "vùng ngoại ô"}, {"id": 25, "word": "tourist attraction", "type": "(n)", "ipa": "/ˈtʊərɪst əˈtrækʃn/", "meaning": "điểm du lịch"}]}, "unit2": {"title": "City Life", "words": [{"id": 1, "word": "bustling", "type": "(adj)", "ipa": "/ˈbʌslɪŋ/", "meaning": "hối hả, nhộn nhịp, náo nhiệt"}, {"id": 2, "word": "carry out", "type": "", "ipa": "/ˈkæri aʊt/", "meaning": "tiến hành (nghiên cứu, nhiệm vụ)"}, {"id": 3, "word": "come down with", "type": "(v)", "ipa": "/kʌm daʊn wɪð/", "meaning": "bị ốm (vì bệnh gì)"}, {"id": 4, "word": "concrete jungle", "type": "(n)", "ipa": "/ˌkɒŋkriːt ˈdʒʌŋɡl/", "meaning": "rừng bê tông (dùng để miêu tả khu vực có nhiều nhà cao tầng)"}, {"id": 5, "word": "congested", "type": "(adj)", "ipa": "/kənˈdʒestɪd/", "meaning": "tắc nghẽn (giao thông)"}, {"id": 6, "word": "construction site", "type": "(n)", "ipa": "/kənˈstrʌkʃn saɪt/", "meaning": "công trường xây dựng"}, {"id": 7, "word": "downtown", "type": "(n)", "ipa": "/ˌdaʊnˈtaʊn/", "meaning": "khu trung tâm thành phố, thị trấn"}, {"id": 8, "word": "get around", "type": "", "ipa": "/ɡet əˈraʊnd/", "meaning": "đi xung quanh (khu vực), di chuyển từ nơi này đến nơi khác"}, {"id": 9, "word": "hang out with", "type": "", "ipa": "/hæŋ aʊt wɪð/", "meaning": "đi chơi (cùng ai)"}, {"id": 10, "word": "hygiene", "type": "(n)", "ipa": "/ˈhaɪdʒiːn/", "meaning": "vệ sinh, vấn đề vệ sinh"}, {"id": 11, "word": "itchy", "type": "(adj)", "ipa": "/ˈɪtʃi/", "meaning": "ngứa, gây ngứa"}, {"id": 12, "word": "leftover", "type": "(n)", "ipa": "/ˈleftəʊvə/", "meaning": "thức ăn thừa"}, {"id": 13, "word": "liveable", "type": "(adj)", "ipa": "/ˈlɪvəbl/", "meaning": "(nơi, địa điểm) đáng sống"}, {"id": 14, "word": "metro", "type": "(n)", "ipa": "/ˈmetrəʊ/", "meaning": "hệ thống tàu điện ngầm"}, {"id": 15, "word": "pricey", "type": "(adj)", "ipa": "/ˈpraɪsi/", "meaning": "đắt đỏ"}, {"id": 16, "word": "process", "type": "(v)", "ipa": "/ˈprəʊses/", "meaning": "xử lý"}, {"id": 17, "word": "public amenities", "type": "", "ipa": "/ˈpʌblɪk əˈmiːnətiz/", "meaning": "những tiện ích công cộng"}, {"id": 18, "word": "rush hour", "type": "(n)", "ipa": "/ˈrʌʃ aʊə/", "meaning": "giờ cao điểm"}, {"id": 19, "word": "sky train", "type": "(n)", "ipa": "/skaɪ treɪn/", "meaning": "tàu điện trên không"}, {"id": 20, "word": "tram", "type": "(n)", "ipa": "/træm/", "meaning": "xe điện"}, {"id": 21, "word": "underground", "type": "(n)", "ipa": "/ˌʌndəˈɡraʊnd/", "meaning": "(hệ thống) tàu điện ngầm"}]}, "unit3": {"title": "Healthy Living for Teens", "words": [{"id": 1, "word": "accomplish", "type": "(v)", "ipa": "/əˈkʌmplɪʃ/", "meaning": "hoàn thành, đạt được (mục đích)"}, {"id": 2, "word": "additional", "type": "(adj)", "ipa": "/əˈdɪʃənl/", "meaning": "thêm, thêm vào"}, {"id": 3, "word": "anxiety", "type": "(n)", "ipa": "/æŋˈzaɪəti/", "meaning": "nỗi lo, mối băn khoăn, sự lo lắng"}, {"id": 4, "word": "appropriately", "type": "(adv)", "ipa": "/əˈprəʊpriətli/", "meaning": "phù hợp, thích đáng"}, {"id": 5, "word": "assignment", "type": "(n)", "ipa": "/əˈsaɪnmənt/", "meaning": "nhiệm vụ, bài tập dành cho học sinh/sinh viên"}, {"id": 6, "word": "counsellor", "type": "(n)", "ipa": "/ˈkaʊnsələ/", "meaning": "cố vấn, người tư vấn"}, {"id": 7, "word": "deadline", "type": "(n)", "ipa": "/ˈdedlaɪn/", "meaning": "thời hạn cuối cùng, hạn cuối"}, {"id": 8, "word": "delay", "type": "(v)", "ipa": "/dɪˈleɪ/", "meaning": "(làm) chậm trễ, trì hoãn"}, {"id": 9, "word": "distraction", "type": "(n)", "ipa": "/dɪˈstrækʃn/", "meaning": "điều làm sao lãng"}, {"id": 10, "word": "due date", "type": "(n)", "ipa": "/ˈdjuː deɪt/", "meaning": "hạn chót (ngày đến hạn để hoàn thành một việc gì đó)"}, {"id": 11, "word": "fattening", "type": "(adj)", "ipa": "/ˈfætnɪŋ/", "meaning": "gây béo phì"}, {"id": 12, "word": "mental", "type": "(adj)", "ipa": "/ˈmentl/", "meaning": "(thuộc) tinh thần, (thuộc) trí tuệ, (thuộc) trí óc"}, {"id": 13, "word": "minimise", "type": "(v)", "ipa": "/ˈmɪnɪmaɪz/", "meaning": "giảm đến mức tối thiểu"}, {"id": 14, "word": "mood", "type": "(n)", "ipa": "/muːd/", "meaning": "tâm trạng"}, {"id": 15, "word": "optimistic", "type": "(adj)", "ipa": "/ˌɒptɪˈmɪstɪk/", "meaning": "lạc quan"}, {"id": 16, "word": "physical", "type": "(adj)", "ipa": "/ˈfɪzɪkl/", "meaning": "(thuộc) cơ thể, (thuộc) thân thể"}, {"id": 17, "word": "priority", "type": "(n)", "ipa": "/praɪˈɒrəti/", "meaning": "sự ưu tiên, trường hợp ưu tiên"}, {"id": 18, "word": "stressed out", "type": "(adj)", "ipa": "/strest aʊt/", "meaning": "căng thẳng"}, {"id": 19, "word": "well-balanced", "type": "(adj)", "ipa": "/ˌwel ˈbælənst/", "meaning": "cân bằng, đúng mực"}]}, "unit4": {"title": "Remembering the Past", "words": [{"id": 1, "word": "ancient", "type": "(adj)", "ipa": "/ˈeɪnʃənt/", "meaning": "cổ đại, lâu đời"}, {"id": 2, "word": "anniversary", "type": "(n)", "ipa": "/ˌænɪˈvɜːsəri/", "meaning": "ngày kỷ niệm, lễ kỉ niệm"}, {"id": 3, "word": "barefoot", "type": "(adj, adv)", "ipa": "/ˈbeəfʊt/", "meaning": "chân trần"}, {"id": 4, "word": "basic", "type": "(adj)", "ipa": "/ˈbeɪsɪk/", "meaning": "cơ bản"}, {"id": 5, "word": "castle", "type": "(n)", "ipa": "/ˈkɑːsl/", "meaning": "lâu đài"}, {"id": 6, "word": "communal", "type": "(adj)", "ipa": "/kəˈmjuːnl/", "meaning": "dùng chung, thuộc cộng đồng"}, {"id": 7, "word": "complex", "type": "(n)", "ipa": "/ˈkɒmpleks/", "meaning": "khu phức hợp, quần thể"}, {"id": 8, "word": "deep-rooted", "type": "(adj)", "ipa": "/ˌdiːp ˈruːtɪd/", "meaning": "lâu đời, ăn sâu bén rễ"}, {"id": 9, "word": "face to face", "type": "(adv)", "ipa": "/feɪs tə ˈfeɪs/", "meaning": "trực tiếp, trực diện"}, {"id": 10, "word": "fish and chips", "type": "(n)", "ipa": "/fɪʃ ən ˈtʃɪps/", "meaning": "món cá và khoai tây rán (món ăn truyền thống của người Anh)"}, {"id": 11, "word": "found", "type": "(v)", "ipa": "/faʊnd/", "meaning": "thành lập"}, {"id": 12, "word": "generation", "type": "(n)", "ipa": "/ˌdʒenəˈreɪʃn/", "meaning": "thế hệ"}, {"id": 13, "word": "monument", "type": "(n)", "ipa": "/ˈmɒnjumənt/", "meaning": "tượng đài"}, {"id": 14, "word": "observe", "type": "(v)", "ipa": "/əbˈzɜːv/", "meaning": "duy trì, tuân theo"}, {"id": 15, "word": "occupied", "type": "(adj)", "ipa": "/ˈɒkjupaɪd/", "meaning": "có người ở"}, {"id": 16, "word": "occupy", "type": "(v)", "ipa": "/ˈɒkjupaɪ/", "meaning": "chiếm giữ"}, {"id": 17, "word": "promote", "type": "(v)", "ipa": "/prəˈməʊt/", "meaning": "thúc đẩy"}, {"id": 18, "word": "recognise", "type": "(v)", "ipa": "/ˈrekəɡnaɪz/", "meaning": "công nhận"}, {"id": 19, "word": "religious", "type": "(adj)", "ipa": "/rɪˈlɪdʒəs/", "meaning": "(thuộc) tôn giáo"}, {"id": 20, "word": "structure", "type": "(n)", "ipa": "/ˈstrʌktʃə/", "meaning": "cấu trúc"}, {"id": 21, "word": "takeaway", "type": "(n)", "ipa": "/ˈteɪkəweɪ/", "meaning": "đồ ăn bán sẵn (để mang về)"}]}, "unit5": {"title": "Our Experiences", "words": [{"id": 1, "word": "amazing", "type": "(adj)", "ipa": "/əˈmeɪzɪŋ/", "meaning": "ngạc nhiên ở mức đáng ngưỡng mộ"}, {"id": 2, "word": "army-like", "type": "(adj)", "ipa": "/ˈɑːmi laɪk/", "meaning": "như trong quân đội"}, {"id": 3, "word": "brilliant", "type": "(adj)", "ipa": "/ˈbrɪliənt/", "meaning": "rất ấn tượng, rất thông minh"}, {"id": 4, "word": "campus", "type": "(n)", "ipa": "/ˈkæmpəs/", "meaning": "khuôn viên (của một trường học)"}, {"id": 5, "word": "confidence", "type": "(n)", "ipa": "/ˈkɒnfɪdəns/", "meaning": "niềm tin, sự tự tin, sự tin tưởng"}, {"id": 6, "word": "coral reef", "type": "(n)", "ipa": "/ˈkɒrəl riːf/", "meaning": "rạn san hô"}, {"id": 7, "word": "eco-tour", "type": "(n)", "ipa": "/ˈiːkəʊ ˌtʊə/", "meaning": "du lịch sinh thái"}, {"id": 8, "word": "embarrassing", "type": "(adj)", "ipa": "/ɪmˈbærəsɪŋ/", "meaning": "làm ai bối rối, ngượng ngùng"}, {"id": 9, "word": "exhilarating", "type": "(adj)", "ipa": "/ɪɡˈzɪlərəreɪtɪŋ/", "meaning": "đầy phấn khích"}, {"id": 10, "word": "experience", "type": "(n)", "ipa": "/ɪkˈspɪəriəns/", "meaning": "sự trải nghiệm"}, {"id": 11, "word": "explore", "type": "(v)", "ipa": "/ɪkˈsplɔː/", "meaning": "khám phá, tìm tòi và học hỏi"}, {"id": 12, "word": "fauna", "type": "(n)", "ipa": "/ˈfɔːnə/", "meaning": "tất cả động vật của một khu vực"}, {"id": 13, "word": "flora", "type": "(n)", "ipa": "/ˈflɔːrə/", "meaning": "tất cả thực vật của một khu vực"}, {"id": 14, "word": "lack", "type": "(v)", "ipa": "/læk/", "meaning": "thiếu"}, {"id": 15, "word": "learn by rote", "type": "", "ipa": "/lɜːn baɪ rəʊt/", "meaning": "học vẹt"}, {"id": 16, "word": "memorable", "type": "(adj)", "ipa": "/ˈmemərəbl/", "meaning": "đáng nhớ"}, {"id": 17, "word": "performance", "type": "(n)", "ipa": "/pəˈfɔːməns/", "meaning": "buổi biểu diễn"}, {"id": 18, "word": "seabed", "type": "(n)", "ipa": "/ˈsiːbed/", "meaning": "đáy biển"}, {"id": 19, "word": "snorkelling", "type": "(n)", "ipa": "/ˈsnɔːkəlɪŋ/", "meaning": "môn thể thao bơi lặn dưới nước có bộ lặn và ống thở"}, {"id": 20, "word": "theme", "type": "(n)", "ipa": "/θiːm/", "meaning": "chủ đề, đề tài"}, {"id": 21, "word": "thrilling", "type": "(adj)", "ipa": "/ˈθrɪlɪŋ/", "meaning": "rất phấn khích và rất vui"}, {"id": 22, "word": "touching", "type": "(adj)", "ipa": "/ˈtʌtʃɪŋ/", "meaning": "gây xúc động, tạo cảm giác đồng cảm"}, {"id": 23, "word": "tribal dance", "type": "(n)", "ipa": "/ˈtraɪbl dɑːns/", "meaning": "điệu múa của bộ tộc"}, {"id": 24, "word": "unpleasant", "type": "(adj)", "ipa": "/ʌnˈpleznt/", "meaning": "không thoải mái, không vui vẻ"}]}, "unit6": {"title": "Vietnamese Lifestyle: Then and Now", "words": [{"id": 1, "word": "democratic", "type": "(adj)", "ipa": "/ˌdeməˈkrætɪk/", "meaning": "thuộc dân chủ"}, {"id": 2, "word": "dependent", "type": "(adj)", "ipa": "/dɪˈpendənt/", "meaning": "lệ thuộc vào"}, {"id": 3, "word": "dye", "type": "(v)", "ipa": "/daɪ/", "meaning": "nhuộm"}, {"id": 4, "word": "extended", "type": "(adj)", "ipa": "/ɪkˈstendɪd/", "meaning": "nhiều thế hệ (trong một gia đình)"}, {"id": 5, "word": "family-oriented", "type": "(adj)", "ipa": "/ˈfæməli ˈɒriəntɪd/", "meaning": "hướng về, coi trọng gia đình"}, {"id": 6, "word": "gap", "type": "(n)", "ipa": "/ɡæp/", "meaning": "khoảng cách"}, {"id": 7, "word": "generation", "type": "(n)", "ipa": "/ˌdʒenəˈreɪʃn/", "meaning": "thế hệ"}, {"id": 8, "word": "household", "type": "(n)", "ipa": "/ˈhaʊshəʊld/", "meaning": "hộ gia đình"}, {"id": 9, "word": "lifestyle", "type": "(n)", "ipa": "/ˈlaɪfstaɪl/", "meaning": "lối sống"}, {"id": 10, "word": "memorise", "type": "(v)", "ipa": "/ˈmeməraɪz/", "meaning": "ghi nhớ"}, {"id": 11, "word": "monk", "type": "(n)", "ipa": "/mʌŋk/", "meaning": "nhà sư"}, {"id": 12, "word": "nuclear", "type": "(adj)", "ipa": "/ˈnjuːkliə/", "meaning": "hai thế hệ (trong một gia đình)"}, {"id": 13, "word": "opportunity", "type": "(n)", "ipa": "/ˌɒpəˈtjuːnəti/", "meaning": "cơ hội"}, {"id": 14, "word": "popularity", "type": "(n)", "ipa": "/ˌpɒpjuˈlærəti/", "meaning": "sự phổ biến"}, {"id": 15, "word": "privacy", "type": "(n)", "ipa": "/ˈprɪvəsi/", "meaning": "sự riêng tư"}, {"id": 16, "word": "promise", "type": "(n, v)", "ipa": "/ˈprɒmɪs/", "meaning": "lời hứa, hứa"}, {"id": 17, "word": "pursue", "type": "(v)", "ipa": "/pəˈsjuː/", "meaning": "theo đuổi"}, {"id": 18, "word": "replace", "type": "(v)", "ipa": "/rɪˈpleɪs/", "meaning": "thay thế"}, {"id": 19, "word": "take notes", "type": "", "ipa": "/teɪk nəʊts/", "meaning": "ghi chép"}, {"id": 20, "word": "trend", "type": "(n)", "ipa": "/trend/", "meaning": "xu hướng"}, {"id": 21, "word": "western", "type": "(adj)", "ipa": "/ˈwestən/", "meaning": "thuộc phương Tây"}]}, "unit7": {"title": "Natural Wonders of the World", "words": [{"id": 1, "word": "access", "type": "(n)", "ipa": "/ˈækses/", "meaning": "tiếp cận, đến được"}, {"id": 2, "word": "annual", "type": "(adj)", "ipa": "/ˈænjuəl/", "meaning": "(xảy ra) hằng năm"}, {"id": 3, "word": "biodiversity", "type": "(n)", "ipa": "/ˌbaɪəʊdaɪˈvɜːsəti/", "meaning": "sự đa dạng sinh học"}, {"id": 4, "word": "coral (n, adj)", "type": "", "ipa": "/ˈkɒrəl/", "meaning": "san hô"}, {"id": 5, "word": "crazy", "type": "", "ipa": "", "meaning": "(adj) (about something) /ˈkreɪzi/"}, {"id": 6, "word": "destination", "type": "(n)", "ipa": "/ˌdestɪˈneɪʃn/", "meaning": "điểm đến"}, {"id": 7, "word": "ecosystem", "type": "(n)", "ipa": "/ˈiːkəʊsɪstəm/", "meaning": "hệ sinh thái"}, {"id": 8, "word": "feature", "type": "(n)", "ipa": "/ˈfiːtʃə/", "meaning": "đặc điểm"}, {"id": 9, "word": "locate", "type": "(v)", "ipa": "/ləʊˈkeɪt/", "meaning": "định vị, đặt ở"}, {"id": 10, "word": "location", "type": "(n)", "ipa": "/ləʊˈkeɪʃn/", "meaning": "địa điểm, nơi chốn"}, {"id": 11, "word": "majestic", "type": "(adj)", "ipa": "/məˈdʒestɪk/", "meaning": "uy nghi, tráng lệ"}, {"id": 12, "word": "occur", "type": "(v)", "ipa": "/əˈkɜː/", "meaning": "xảy ra"}, {"id": 13, "word": "paradise", "type": "(n)", "ipa": "/ˈpærədaɪs/", "meaning": "thiên đường, nơi đẹp tuyệt trần"}, {"id": 14, "word": "peak", "type": "(n)", "ipa": "/piːk/", "meaning": "đỉnh, đỉnh núi"}, {"id": 15, "word": "permission", "type": "(n)", "ipa": "/pəˈmɪʃn/", "meaning": "sự cho phép"}, {"id": 16, "word": "permit", "type": "(v)", "ipa": "/pəˈmɪt/", "meaning": "cho phép"}, {"id": 17, "word": "possess", "type": "(v)", "ipa": "/pəˈzes/", "meaning": "có, sở hữu"}, {"id": 18, "word": "support", "type": "(v)", "ipa": "/səˈpɔːt/", "meaning": "ủng hộ, giúp đỡ"}, {"id": 19, "word": "sustainable", "type": "(adj)", "ipa": "/səˈsteɪnəbl/", "meaning": "bền vững"}, {"id": 20, "word": "travel destination", "type": "", "ipa": "/ˈtrævl ˌdestɪˈneɪʃn/", "meaning": "điểm đến du lịch"}, {"id": 21, "word": "urgent", "type": "(adj)", "ipa": "/ˈɜːdʒənt/", "meaning": "gấp, cấp bách"}]}, "unit8": {"title": "Tourism", "words": [{"id": 1, "word": "agency", "type": "(n)", "ipa": "/ˈeɪdʒənsi/", "meaning": "hãng (du lịch)"}, {"id": 2, "word": "agent", "type": "(n)", "ipa": "/ˈeɪdʒənt/", "meaning": "nhân viên hãng"}, {"id": 3, "word": "brochure", "type": "(n)", "ipa": "/ˈbrəʊʃə/", "meaning": "quyển quảng cáo (du lịch)"}, {"id": 4, "word": "domestic tourism", "type": "", "ipa": "/dəˈmestɪk ˈtʊərɪzəm/", "meaning": "du lịch trong nước"}, {"id": 5, "word": "estimate", "type": "(v)", "ipa": "/ˈestɪmeɪt/", "meaning": "ước tính"}, {"id": 6, "word": "fixed", "type": "(adj)", "ipa": "/fɪkst/", "meaning": "cố định"}, {"id": 7, "word": "food tourism", "type": "", "ipa": "/fuːd ˈtʊərɪzəm/", "meaning": "du lịch ẩm thực"}, {"id": 8, "word": "graveyard", "type": "(n)", "ipa": "/ˈɡreɪvjɑːd/", "meaning": "nghĩa địa"}, {"id": 9, "word": "holidaymaker", "type": "(n)", "ipa": "/ˈhɒlɪdeɪmeɪkə/", "meaning": "người đi nghỉ"}, {"id": 10, "word": "homestay", "type": "(n)", "ipa": "/ˈhəʊmsteɪ/", "meaning": "nhà trọ"}, {"id": 11, "word": "hop-on hop-off", "type": "(n)", "ipa": "/hɒp ɒn hɒp ɒf/", "meaning": "(tour) bằng xe buýt có thể lên, xuống tại nhiều điểm"}, {"id": 12, "word": "hunt", "type": "(v)", "ipa": "/hʌnt/", "meaning": "săn tìm"}, {"id": 13, "word": "itinerary", "type": "(n)", "ipa": "/aɪˈtɪnərəri/", "meaning": "lịch trình"}, {"id": 14, "word": "loft", "type": "(n)", "ipa": "/lɒft/", "meaning": "gác mái"}, {"id": 15, "word": "low season", "type": "(n)", "ipa": "/ˈləʊ siːzn/", "meaning": "mùa (du lịch) vắng khách"}, {"id": 16, "word": "online app (application) /ˌɒnˈlaɪn æp/", "type": "", "ipa": "", "meaning": "ứng dụng trên mạng"}, {"id": 17, "word": "package holiday", "type": "(n)", "ipa": "/ˈpækɪdʒ hɒlɪdeɪ/", "meaning": "kỳ nghỉ trọn gói"}, {"id": 18, "word": "ruinous", "type": "(adj)", "ipa": "/ˈruːɪnəs/", "meaning": "đổ nát"}, {"id": 19, "word": "self-guided", "type": "", "ipa": "/ˌself ˈɡaɪdɪd/", "meaning": "tự túc"}, {"id": 20, "word": "shopping tourism", "type": "", "ipa": "/ˈʃɒpɪŋ ˈtʊərɪzəm/", "meaning": "du lịch mua sắm"}, {"id": 21, "word": "smooth", "type": "(adj)", "ipa": "/smuːð/", "meaning": "trôi chảy"}, {"id": 22, "word": "wander", "type": "(v)", "ipa": "/ˈwɒndə/", "meaning": "dạo chơi"}, {"id": 23, "word": "world-famous", "type": "(adj)", "ipa": "/ˌwɜːld ˈfeɪməs/", "meaning": "nổi tiếng thế giới"}, {"id": 24, "word": "work out", "type": "", "ipa": "/wɜːk aʊt/", "meaning": "soạn thảo, lên (kế hoạch)"}]}, "unit9": {"title": "World Englishes", "words": [{"id": 1, "word": "bilingual", "type": "(adj)", "ipa": "/baɪˈlɪŋɡwəl/", "meaning": "sử dụng được hai ngôn ngữ"}, {"id": 2, "word": "borrowed word", "type": "", "ipa": "/ˈbɒrəʊd wɜːd/", "meaning": "từ mượn"}, {"id": 3, "word": "concentric", "type": "(adj)", "ipa": "/kənˈsentrɪk/", "meaning": "đồng tâm"}, {"id": 4, "word": "consist", "type": "(v)", "ipa": "/kənˈsɪst/", "meaning": "bao gồm"}, {"id": 5, "word": "copy", "type": "(v)", "ipa": "/ˈkɒpi/", "meaning": "chép lại"}, {"id": 6, "word": "establish", "type": "(v)", "ipa": "/ɪˈstæblɪʃ/", "meaning": "thành lập"}, {"id": 7, "word": "exchange student", "type": "", "ipa": "/ɪksˈtʃeɪndʒ ˌstjuːdənt/", "meaning": "học sinh trao đổi"}, {"id": 8, "word": "Expanding Circle", "type": "", "ipa": "/ɪkˈspændɪŋ ˈsɜːkl/", "meaning": "vòng tròn mở rộng"}, {"id": 9, "word": "first language", "type": "(n)", "ipa": "/ˌfɜːst ˈlæŋɡwɪdʒ/", "meaning": "ngôn ngữ thứ nhất"}, {"id": 10, "word": "fluent", "type": "(adj)", "ipa": "/ˈfluːənt/", "meaning": "trôi chảy, thành thạo"}, {"id": 11, "word": "go over", "type": "", "ipa": "/ɡəʊ ˈəʊvə/", "meaning": "ôn tập lại"}, {"id": 12, "word": "immigrant", "type": "(n)", "ipa": "/ˈɪmɪɡrənt/", "meaning": "người nhập cư"}, {"id": 13, "word": "Inner Circle", "type": "", "ipa": "/ˌɪnə ˈsɜːkl/", "meaning": "vòng tròn bên trong"}, {"id": 14, "word": "look up", "type": "", "ipa": "/lʊk ʌp/", "meaning": "tra (từ điển)"}, {"id": 15, "word": "mean", "type": "(v)", "ipa": "/miːn/", "meaning": "nghĩa là"}, {"id": 16, "word": "model", "type": "(n)", "ipa": "/ˈmɒdl/", "meaning": "mô hình"}, {"id": 17, "word": "official language", "type": "(n)", "ipa": "/əˌfɪʃl ˈlæŋɡwɪdʒ/", "meaning": "ngôn ngữ chính thức"}, {"id": 18, "word": "Outer Circle", "type": "", "ipa": "/ˌaʊtə ˈsɜːkl/", "meaning": "vòng tròn bên ngoài"}, {"id": 19, "word": "pick up", "type": "", "ipa": "/pɪk ʌp/", "meaning": "học (ngôn ngữ tự nhiên)"}, {"id": 20, "word": "propose", "type": "(v)", "ipa": "/prəˈpəʊz/", "meaning": "đề xuất"}, {"id": 21, "word": "second language", "type": "(n)", "ipa": "/ˌsekənd ˈlæŋɡwɪdʒ/", "meaning": "ngôn ngữ thứ hai"}, {"id": 22, "word": "standard", "type": "(n)", "ipa": "/ˈstændəd/", "meaning": "chuẩn mực"}, {"id": 23, "word": "translate", "type": "(v)", "ipa": "/trænzˈleɪt/", "meaning": "dịch"}, {"id": 24, "word": "variety", "type": "(n)", "ipa": "/vəˈraɪəti/", "meaning": "biến thể"}, {"id": 25, "word": "vocabulary", "type": "(n)", "ipa": "/vəˈkæbjələri/", "meaning": "từ vựng"}]}, "unit10": {"title": "Planet Earth", "words": [{"id": 1, "word": "affect", "type": "(v)", "ipa": "/əˈfekt/", "meaning": "gây ảnh hưởng"}, {"id": 2, "word": "appreciate", "type": "(v)", "ipa": "/əˈpriːʃieɪt/", "meaning": "đánh giá cao"}, {"id": 3, "word": "climate change", "type": "(n)", "ipa": "/ˈklaɪmət tʃeɪndʒ/", "meaning": "biến đổi khí hậu"}, {"id": 4, "word": "droppings", "type": "(n)", "ipa": "/ˈdrɒpɪŋz/", "meaning": "phân (động vật)"}, {"id": 5, "word": "essential", "type": "(adj)", "ipa": "/ɪˈsenʃl/", "meaning": "vô cùng quan trọng"}, {"id": 6, "word": "ecological balance", "type": "", "ipa": "/ˌiːkəˈlɒdʒɪkl ˈbæləns/", "meaning": "cân bằng sinh thái"}, {"id": 7, "word": "fascinating", "type": "(adj)", "ipa": "/ˈfæsɪneɪtɪŋ/", "meaning": "rất thú vị và hấp dẫn"}, {"id": 8, "word": "fertiliser", "type": "(n)", "ipa": "/ˈfɜːtəlaɪzə/", "meaning": "phân bón"}, {"id": 9, "word": "food chain", "type": "(n)", "ipa": "/ˈfuːd tʃeɪn/", "meaning": "chuỗi thức ăn"}, {"id": 10, "word": "grassland", "type": "(n)", "ipa": "/ˈɡrɑːslænd/", "meaning": "khu vực đồng cỏ"}, {"id": 11, "word": "habitat", "type": "(n)", "ipa": "/ˈhæbɪtæt/", "meaning": "môi trường sống của động thực vật"}, {"id": 12, "word": "harm", "type": "(v)", "ipa": "/hɑːm/", "meaning": "làm hại"}, {"id": 13, "word": "landform", "type": "(n)", "ipa": "/ˈlændfɔːm/", "meaning": "dạng địa hình, địa mạo"}, {"id": 14, "word": "nature reserve", "type": "(n)", "ipa": "/ˈneɪtʃə rɪˌzɜːv/", "meaning": "khu bảo tồn thiên nhiên"}, {"id": 15, "word": "observe", "type": "(v)", "ipa": "/əbˈzɜːv/", "meaning": "quan sát, chú ý"}, {"id": 16, "word": "orbit", "type": "(v)", "ipa": "/ˈɔːbɪt/", "meaning": "quay quanh quỹ đạo"}, {"id": 17, "word": "outer space", "type": "(n)", "ipa": "/ˌaʊtə ˈspeɪs/", "meaning": "ngoài vũ trụ"}, {"id": 18, "word": "pesticide", "type": "(n)", "ipa": "/ˈpestɪsaɪd/", "meaning": "thuốc diệt cỏ"}, {"id": 19, "word": "pole", "type": "(n)", "ipa": "/pəʊl/", "meaning": "cực (Bắc / Nam)"}, {"id": 20, "word": "preserve", "type": "(v)", "ipa": "/prɪˈzɜːv/", "meaning": "bảo tồn"}, {"id": 21, "word": "threat", "type": "(n)", "ipa": "/θret/", "meaning": "nỗi đe dọa"}, {"id": 22, "word": "vital", "type": "(adj)", "ipa": "/ˈvaɪtl/", "meaning": "quan trọng mức sống còn"}]}, "unit11": {"title": "Electronic Devices", "words": [{"id": 1, "word": "3D printer", "type": "(n)", "ipa": "/ˌθriː diː ˈprɪntə/", "meaning": "máy in 3D"}, {"id": 2, "word": "aluminium", "type": "(n)", "ipa": "/ˌæljəˈmɪniəm/", "meaning": "nhôm"}, {"id": 3, "word": "camcorder", "type": "(n)", "ipa": "/ˈkæmkɔːdə/", "meaning": "máy quay phim xách tay"}, {"id": 4, "word": "cardboard", "type": "(n)", "ipa": "/ˈkɑːdbɔːd/", "meaning": "bìa cứng, các tông"}, {"id": 5, "word": "copper", "type": "(n)", "ipa": "/ˈkɒpə/", "meaning": "đồng"}, {"id": 6, "word": "e-reader", "type": "(n)", "ipa": "/ˈiː riːdə/", "meaning": "máy đọc sách điện tử"}, {"id": 7, "word": "leaflet", "type": "(n)", "ipa": "/ˈliːflət/", "meaning": "tờ rơi (để quảng cáo)"}, {"id": 8, "word": "plastic", "type": "(n)", "ipa": "/ˈplæstɪk/", "meaning": "chất dẻo"}, {"id": 9, "word": "portable", "type": "(adj)", "ipa": "/ˈpɔːtəbl/", "meaning": "có thể mang theo, xách tay"}, {"id": 10, "word": "portable music player", "type": "", "ipa": "/ˈpɔːtəbl ˈmjuːzɪk ˌpleɪə/ máy nghe nhạc cầm tay", "meaning": ""}, {"id": 11, "word": "robotic vacuum cleaner /rəʊˈbɒtɪk", "type": "", "ipa": "", "meaning": "ˈvækjuːm ˌkliːnə/ robot hút bụi tự động"}, {"id": 12, "word": "rubber", "type": "(n)", "ipa": "/ˈrʌbə(r)/", "meaning": "cao su"}, {"id": 13, "word": "self-portrait", "type": "(n)", "ipa": "/ˌself ˈpɔːtrɪt/", "meaning": "ảnh chân dung tự chụp"}, {"id": 14, "word": "smartwatch", "type": "(n)", "ipa": "/ˈsmɑːtwɒtʃ/", "meaning": "đồng hồ thông minh"}, {"id": 15, "word": "steel", "type": "(n)", "ipa": "/stiːl/", "meaning": "thép"}, {"id": 16, "word": "stylish", "type": "(adj)", "ipa": "/ˈstaɪlɪʃ/", "meaning": "hợp thời trang, kiểu cách"}, {"id": 17, "word": "suck", "type": "(v)", "ipa": "/sʌk/", "meaning": "hút"}, {"id": 18, "word": "touchscreen", "type": "(n)", "ipa": "/ˈtʌtʃskriːn/", "meaning": "màn hình cảm ứng"}, {"id": 19, "word": "virtual", "type": "(adj)", "ipa": "/ˈvɜːtʃuəl/", "meaning": "ảo"}, {"id": 20, "word": "window shade", "type": "(n)", "ipa": "/ˈwɪndəʊ ʃeɪd/", "meaning": "màn cửa sổ"}, {"id": 21, "word": "wireless", "type": "(adj)", "ipa": "/ˈwaɪələs/", "meaning": "không dây, vô tuyến"}]}, "unit12": {"title": "Career Choices", "words": [{"id": 1, "word": "agriculture", "type": "", "ipa": "", "meaning": "engineering /ˌæɡrɪkʌltʃər ˌendʒɪˈnɪərɪŋ/ ngành kỹ sư nông nghiệp"}, {"id": 2, "word": "assembly worker", "type": "(n)", "ipa": "/əˈsembli ˈwɜːkə/", "meaning": "công nhân dây chuyền"}, {"id": 3, "word": "bartender", "type": "(n)", "ipa": "/ˈbɑːtendə/", "meaning": "thợ pha chế đồ uống có cồn"}, {"id": 4, "word": "career", "type": "(n)", "ipa": "/kəˈrɪə/", "meaning": "sự nghiệp"}, {"id": 5, "word": "cashier", "type": "(n)", "ipa": "/kæˈʃɪə/", "meaning": "thu ngân"}, {"id": 6, "word": "decisive", "type": "(adj)", "ipa": "/dɪˈsaɪsɪv/", "meaning": "quyết đoán"}, {"id": 7, "word": "demanding", "type": "(adj)", "ipa": "/dɪˈmɑːndɪŋ/", "meaning": "(yêu cầu) khắt khe, phức tạp"}, {"id": 8, "word": "fabric", "type": "(n)", "ipa": "/ˈfæbrɪk/", "meaning": "vải vóc"}, {"id": 9, "word": "garment worker", "type": "(n)", "ipa": "/ˈɡɑːmənt ˈwɜːkə/", "meaning": "công nhân may"}, {"id": 11, "word": "hands-on", "type": "(adj)", "ipa": "/ˌhændz ˈɒn/", "meaning": "có tính thực tiễn, thực hành"}, {"id": 12, "word": "inquiring", "type": "(adj)", "ipa": "/ɪnˈkwaɪərɪŋ/", "meaning": "ham học hỏi, tìm tòi"}, {"id": 13, "word": "knowledgeable", "type": "(adj)", "ipa": "/ˈnɒlɪdʒəbl/", "meaning": "am hiểu, thông thạo"}, {"id": 14, "word": "mechanic", "type": "(n)", "ipa": "/məˈkænɪk/", "meaning": "thợ sửa chữa"}, {"id": 15, "word": "orientation", "type": "(n)", "ipa": "/ˌɔːriənˈteɪʃn/", "meaning": "sự định hướng"}, {"id": 16, "word": "repetitive", "type": "(adj)", "ipa": "/rɪˈpetətɪv/", "meaning": "lặp đi lặp lại"}, {"id": 17, "word": "rewarding", "type": "(adj)", "ipa": "/rɪˈwɔːdɪŋ/", "meaning": "bổ ích, xứng đáng"}, {"id": 18, "word": "sew", "type": "(v)", "ipa": "/səʊ/", "meaning": "khâu, may vá"}, {"id": 19, "word": "software engineer", "type": "(n)", "ipa": "/ˈsɒftweər ˌendʒɪˈnɪə/", "meaning": "kỹ sư phần mềm"}, {"id": 20, "word": "surgeon", "type": "(n)", "ipa": "/ˈsɜːdʒən/", "meaning": "bác sĩ phẫu thuật"}, {"id": 21, "word": "vocational", "type": "(adj)", "ipa": "/vəʊˈkeɪʃənl/", "meaning": "thuộc về nghề nghiệp, hướng nghiệp"}, {"id": 22, "word": "well-paid", "type": "(adj)", "ipa": "/ˌwel ˈpeɪd/", "meaning": "được trả lương cao"}]}};
+let currentUnit = 'unit1';
+let currentTab = 'list';
+let fcIndex = 0;
+let fcFlipped = false;
+let fcWords = [];
+let quizQuestions = [];
+let quizAnswers = {};
+
+function renderSidebar() {
+  const sb = document.getElementById('sidebar');
+  let html = '';
+  for (const [key, unit] of Object.entries(DATA)) {
+    const num = key.replace('unit','');
+    const known = SM.getVocabKnownCount(key);
+    const total = unit.words.length;
+    const pct = total > 0 ? Math.round(known/total*100) : 0;
+    const isActive = key === currentUnit ? 'active' : '';
+    html += '<div class="unit-card ' + isActive + '" onclick="loadUnit(\'' + key + '\')">' +
+      '<div><span class="unit-num">Unit ' + num + '</span> ' + unit.title + '</div>' +
+      '<div style="font-size:12px;color:var(--text-light);margin-top:4px">' + known + '/' + total + ' từ (' + pct + '%)' +
+      (pct === 100 ? ' ✅' : '') + '</div>' +
+      '<div class="progress-bar" style="height:4px"><div class="progress-fill" style="width:' + pct + '%"></div></div></div>';
+  }
+  sb.innerHTML = html;
+}
+
+function loadUnit(unitId) {
+  currentUnit = unitId;
+  renderSidebar();
+  switchTab(currentTab);
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.tab-btn').forEach((b,i) => {
+    b.classList.toggle('active', ['list','flashcard','quiz'][i] === tab);
+  });
+  document.getElementById('searchBox').style.display = tab === 'list' ? '' : 'none';
+  if (tab === 'list') renderList();
+  else if (tab === 'flashcard') renderFlashcard();
+  else renderQuiz();
+}
+
+function renderList(filter='') {
+  const words = DATA[currentUnit].words;
+  let html = '<table><thead><tr><th>STT</th><th>Từ vựng</th><th>Loại</th><th>Phiên âm</th><th>Nghĩa</th><th></th></tr></thead><tbody>';
+  words.forEach(w => {
+    if (filter && !w.word.toLowerCase().includes(filter) && !w.meaning.toLowerCase().includes(filter)) return;
+    const known = SM.isVocabKnown(currentUnit, w.id);
+    html += '<tr' + (known ? ' style="opacity:0.6"' : '') + '>' +
+      '<td>' + w.id + '</td>' +
+      '<td><strong>' + w.word + '</strong></td>' +
+      '<td>' + w.type + '</td>' +
+      '<td class="ipa">' + w.ipa + '</td>' +
+      '<td>' + w.meaning + '</td>' +
+      '<td>' + (known ? '<span class="word-known">✅</span>' : '<button class="btn btn-success" style="padding:4px 10px;font-size:12px" onclick="markKnown(' + w.id + ')">Thuộc</button>') + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('tabContent').innerHTML = html;
+}
+
+function filterWords() {
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  renderList(q);
+}
+
+function markKnown(wordId) {
+  SM.saveVocabKnown(currentUnit, wordId);
+  renderList();
+  renderSidebar();
+  showToast('Đã đánh dấu thuộc!');
+}
+
+function renderFlashcard() {
+  fcWords = shuffle(DATA[currentUnit].words);
+  fcIndex = 0;
+  fcFlipped = false;
+  updateFlashcard();
+}
+
+function updateFlashcard() {
+  if (!fcWords.length) return;
+  const w = fcWords[fcIndex];
+  const known = SM.getVocabKnownCount(currentUnit);
+  document.getElementById('tabContent').innerHTML =
+    '<div class="fc-counter">Từ ' + (fcIndex+1) + '/' + fcWords.length + ' | Đã biết: ' + known + '</div>' +
+    '<div class="flashcard' + (fcFlipped ? ' flipped' : '') + '" onclick="flipCard()">' +
+    '<div class="flashcard-inner">' +
+    '<div class="flashcard-front"><div class="fc-word">' + w.word + '</div><div class="fc-ipa">' + w.ipa + '</div><div style="margin-top:16px;font-size:13px;color:var(--text-light)">Nhấn để lật</div></div>' +
+    '<div class="flashcard-back"><div class="fc-meaning">' + w.meaning + '</div><div class="fc-type">' + w.type + '</div></div>' +
+    '</div></div>' +
+    '<div class="fc-controls">' +
+    '<button class="btn btn-outline" onclick="prevCard()">← Trước</button>' +
+    '<button class="btn btn-primary" onclick="flipCard()">🔄 Lật</button>' +
+    '<button class="btn btn-outline" onclick="nextCard()">Sau →</button>' +
+    '<button class="btn btn-success" onclick="fcMarkKnown()">✅ Biết</button>' +
+    '<button class="btn btn-danger" onclick="nextCard()">❌ Chưa</button>' +
+    '</div>';
+}
+
+function flipCard() { fcFlipped = !fcFlipped; updateFlashcard(); }
+function nextCard() { fcIndex = (fcIndex + 1) % fcWords.length; fcFlipped = false; updateFlashcard(); }
+function prevCard() { fcIndex = (fcIndex - 1 + fcWords.length) % fcWords.length; fcFlipped = false; updateFlashcard(); }
+function fcMarkKnown() { SM.saveVocabKnown(currentUnit, fcWords[fcIndex].id); renderSidebar(); nextCard(); showToast('✅ Đã thuộc!'); }
+
+function renderQuiz() {
+  const words = DATA[currentUnit].words;
+  if (words.length < 4) { document.getElementById('tabContent').innerHTML = '<p>Cần ít nhất 4 từ để tạo quiz.</p>'; return; }
+  quizQuestions = shuffle(words).slice(0, Math.min(10, words.length));
+  quizAnswers = {};
+  let html = '<h3 style="margin-bottom:16px">Quiz Từ Vựng — ' + DATA[currentUnit].title + '</h3>';
+  quizQuestions.forEach((w, qi) => {
+    const others = shuffle(words.filter(o => o.id !== w.id)).slice(0, 3);
+    const opts = shuffle([w, ...others]);
+    html += '<div class="card" id="vq' + qi + '"><strong>Câu ' + (qi+1) + ':</strong> ' + w.meaning + ' (' + w.type + ')' +
+      '<div style="margin-top:8px">';
+    opts.forEach((o, oi) => {
+      html += '<label class="quiz-option" id="vqo' + qi + '_' + oi + '" onclick="selectVocabAnswer(' + qi + ',' + oi + ',\'' + o.word + '\')">' +
+        String.fromCharCode(65+oi) + '. ' + o.word + ' <span class="ipa">' + o.ipa + '</span></label>';
+    });
+    html += '</div></div>';
+  });
+  html += '<button class="btn btn-primary" onclick="submitVocabQuiz()" style="width:100%;padding:14px">NỘP BÀI</button>';
+  document.getElementById('tabContent').innerHTML = html;
+}
+
+function selectVocabAnswer(qi, oi, word) {
+  quizAnswers[qi] = word;
+  for (let k = 0; k < 4; k++) {
+    const el = document.getElementById('vqo' + qi + '_' + k);
+    if (el) el.classList.toggle('selected', k === oi);
+  }
+}
+
+function submitVocabQuiz() {
+  let score = 0;
+  quizQuestions.forEach((w, qi) => {
+    if (quizAnswers[qi] === w.word) score++;
+  });
+  SM.saveResult('vocab_quiz', currentUnit + '_' + Date.now(), score, quizQuestions.length, quizAnswers);
+  showToast('Kết quả: ' + score + '/' + quizQuestions.length + ' (' + Math.round(score/quizQuestions.length*100) + '%)', score >= quizQuestions.length * 0.7 ? 'success' : 'error');
+  renderQuiz();
+}
+
+renderSidebar();
+loadUnit('unit1');
+</script>
+</body>
+</html>
