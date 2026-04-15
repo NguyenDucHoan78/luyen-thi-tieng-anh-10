@@ -276,6 +276,9 @@ let fcFlipped = false;
 let fcWords = [];
 let quizQuestions = [];
 let quizAnswers = {};
+let quizMode = 'vn2en';
+let quizCount = 10;
+let quizSubmitted = false;
 
 function renderSidebar() {
   const sb = document.getElementById('sidebar');
@@ -377,25 +380,68 @@ function fcMarkKnown() { SM.saveVocabKnown(currentUnit, fcWords[fcIndex].id); re
 function renderQuiz() {
   const words = DATA[currentUnit].words;
   if (words.length < 4) { document.getElementById('tabContent').innerHTML = '<p>Cần ít nhất 4 từ để tạo quiz.</p>'; return; }
-  quizQuestions = shuffle(words).slice(0, Math.min(10, words.length));
+  quizSubmitted = false;
+  
+  // Settings panel
+  const maxQ = words.length;
+  let html = '<div class="card" style="margin-bottom:16px">' +
+    '<h3 style="margin-bottom:12px">Quiz Từ Vựng — ' + DATA[currentUnit].title + '</h3>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px">' +
+    '<div><strong>Dạng câu:</strong><div style="display:flex;gap:6px;margin-top:4px">' +
+    '<button class="btn ' + (quizMode==='vn2en'?'btn-primary':'btn-outline') + '" onclick="quizMode=\'vn2en\';renderQuiz()" style="padding:6px 12px;font-size:13px">🇻🇳→🇬🇧 Nghĩa → Từ</button>' +
+    '<button class="btn ' + (quizMode==='en2vn'?'btn-primary':'btn-outline') + '" onclick="quizMode=\'en2vn\';renderQuiz()" style="padding:6px 12px;font-size:13px">🇬🇧→🇻🇳 Từ → Nghĩa</button>' +
+    '<button class="btn ' + (quizMode==='ipa'?'btn-primary':'btn-outline') + '" onclick="quizMode=\'ipa\';renderQuiz()" style="padding:6px 12px;font-size:13px">🔤 IPA → Từ</button>' +
+    '</div></div>' +
+    '<div><strong>Số câu:</strong><div style="display:flex;gap:6px;margin-top:4px">' +
+    '<button class="btn ' + (quizCount===10?'btn-primary':'btn-outline') + '" onclick="quizCount=10;renderQuiz()" style="padding:6px 12px;font-size:13px">10</button>' +
+    '<button class="btn ' + (quizCount===15?'btn-primary':'btn-outline') + '" onclick="quizCount=15;renderQuiz()" style="padding:6px 12px;font-size:13px">15</button>' +
+    '<button class="btn ' + (quizCount===maxQ?'btn-primary':'btn-outline') + '" onclick="quizCount=' + maxQ + ';renderQuiz()" style="padding:6px 12px;font-size:13px">Tất cả (' + maxQ + ')</button>' +
+    '</div></div></div></div>';
+  
+  const count = Math.min(quizCount, maxQ);
+  quizQuestions = shuffle(words).slice(0, count);
   quizAnswers = {};
-  let html = '<h3 style="margin-bottom:16px">Quiz Từ Vựng — ' + DATA[currentUnit].title + '</h3>';
+  
   quizQuestions.forEach((w, qi) => {
     const others = shuffle(words.filter(o => o.id !== w.id)).slice(0, 3);
     const opts = shuffle([w, ...others]);
-    html += '<div class="card" id="vq' + qi + '"><strong>Câu ' + (qi+1) + ':</strong> ' + w.meaning + ' (' + w.type + ')' +
-      '<div style="margin-top:8px">';
-    opts.forEach((o, oi) => {
-      html += '<label class="quiz-option" id="vqo' + qi + '_' + oi + '" onclick="selectVocabAnswer(' + qi + ',' + oi + ',\'' + o.word + '\')">' +
-        String.fromCharCode(65+oi) + '. ' + o.word + ' <span class="ipa">' + o.ipa + '</span></label>';
-    });
-    html += '</div></div>';
+    
+    let prompt = '';
+    let optionDisplay = '';
+    
+    if (quizMode === 'vn2en') {
+      prompt = w.meaning + (w.type ? ' <span style="color:var(--text-light)">(' + w.type + ')</span>' : '');
+      opts.forEach((o, oi) => {
+        optionDisplay += '<label class="quiz-option" id="vqo' + qi + '_' + oi + '" data-word="' + o.word + '" onclick="selectVocabAnswer(' + qi + ',' + oi + ',\'' + o.word.replace(/'/g,'\\\'') + '\')">' +
+          String.fromCharCode(65+oi) + '. ' + o.word + ' <span class="ipa">' + o.ipa + '</span></label>';
+      });
+    } else if (quizMode === 'en2vn') {
+      prompt = '<span style="font-size:18px;font-weight:600">' + w.word + '</span> <span class="ipa">' + w.ipa + '</span>';
+      opts.forEach((o, oi) => {
+        optionDisplay += '<label class="quiz-option" id="vqo' + qi + '_' + oi + '" data-word="' + o.word + '" onclick="selectVocabAnswer(' + qi + ',' + oi + ',\'' + o.word.replace(/'/g,'\\\'') + '\')">' +
+          String.fromCharCode(65+oi) + '. ' + o.meaning + (o.type ? ' (' + o.type + ')' : '') + '</label>';
+      });
+    } else {
+      prompt = '<span style="font-size:20px;font-family:monospace">' + w.ipa + '</span>' + (w.type ? ' <span style="color:var(--text-light)">(' + w.type + ')</span>' : '');
+      opts.forEach((o, oi) => {
+        optionDisplay += '<label class="quiz-option" id="vqo' + qi + '_' + oi + '" data-word="' + o.word + '" onclick="selectVocabAnswer(' + qi + ',' + oi + ',\'' + o.word.replace(/'/g,'\\\'') + '\')">' +
+          String.fromCharCode(65+oi) + '. ' + o.word + '</label>';
+      });
+    }
+    
+    html += '<div class="card" id="vq' + qi + '" data-correct="' + w.word + '">' +
+      '<strong>Câu ' + (qi+1) + '/' + count + ':</strong> ' + prompt +
+      '<div style="margin-top:8px">' + optionDisplay + '</div></div>';
   });
-  html += '<button class="btn btn-primary" onclick="submitVocabQuiz()" style="width:100%;padding:14px">NỘP BÀI</button>';
+  
+  html += '<div style="text-align:center;margin:20px 0">' +
+    '<button class="btn btn-primary" id="vocabSubmitBtn" onclick="submitVocabQuiz()" style="padding:14px 48px;font-size:16px">📩 NỘP BÀI</button></div>' +
+    '<div id="vocabResult"></div>';
   document.getElementById('tabContent').innerHTML = html;
 }
 
 function selectVocabAnswer(qi, oi, word) {
+  if (quizSubmitted) return;
   quizAnswers[qi] = word;
   for (let k = 0; k < 4; k++) {
     const el = document.getElementById('vqo' + qi + '_' + k);
@@ -404,13 +450,107 @@ function selectVocabAnswer(qi, oi, word) {
 }
 
 function submitVocabQuiz() {
+  if (quizSubmitted) return;
+  quizSubmitted = true;
   let score = 0;
+  const wrongWords = [];
+  
   quizQuestions.forEach((w, qi) => {
-    if (quizAnswers[qi] === w.word) score++;
+    const box = document.getElementById('vq' + qi);
+    const isCorrect = quizAnswers[qi] === w.word;
+    if (isCorrect) {
+      score++;
+      box?.classList.add('correct');
+    } else {
+      box?.classList.add('wrong');
+      wrongWords.push(w);
+    }
+    
+    // Highlight correct and wrong options
+    for (let k = 0; k < 4; k++) {
+      const el = document.getElementById('vqo' + qi + '_' + k);
+      if (!el) continue;
+      const optWord = el.getAttribute('data-word');
+      if (optWord === w.word) {
+        el.classList.add('correct');
+      } else if (el.classList.contains('selected')) {
+        el.classList.add('wrong');
+      }
+      el.style.pointerEvents = 'none';
+    }
   });
-  SM.saveResult('vocab_quiz', currentUnit + '_' + Date.now(), score, quizQuestions.length, quizAnswers);
-  showToast('Kết quả: ' + score + '/' + quizQuestions.length + ' (' + Math.round(score/quizQuestions.length*100) + '%)', score >= quizQuestions.length * 0.7 ? 'success' : 'error');
-  renderQuiz();
+  
+  const total = quizQuestions.length;
+  const pct = Math.round(score/total*100);
+  SM.saveResult('vocab_quiz', currentUnit + '_' + Date.now(), score, total, quizAnswers);
+  
+  let resultHtml = '<div class="result-box ' + (pct >= 70 ? 'good' : 'bad') + '">' +
+    '<div style="font-size:48px">' + (pct >= 70 ? '🎉' : '💪') + '</div>' +
+    '<div style="font-size:32px;font-weight:800;margin:8px 0">' + score + '/' + total + '</div>' +
+    '<div style="font-size:16px">(' + pct + '% đúng)</div>' +
+    '<div style="margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">' +
+    '<button class="btn btn-primary" onclick="renderQuiz()">🔄 Làm lại</button>';
+  
+  if (wrongWords.length > 0) {
+    resultHtml += '<button class="btn btn-outline" onclick="quizRetryWrong()" style="border-color:var(--error);color:var(--error)">❌ Ôn ' + wrongWords.length + ' từ sai</button>';
+  }
+  resultHtml += '</div></div>';
+  
+  document.getElementById('vocabResult').innerHTML = resultHtml;
+  document.getElementById('vocabSubmitBtn').style.display = 'none';
+  scrollTo('vocabResult');
+}
+
+function quizRetryWrong() {
+  // Restart quiz but only with wrong words plus random fillers
+  const words = DATA[currentUnit].words;
+  const wrongIds = quizQuestions.filter((w, qi) => quizAnswers[qi] !== w.word).map(w => w.id);
+  const wrongWords = words.filter(w => wrongIds.includes(w.id));
+  if (wrongWords.length < 1) return;
+  
+  quizSubmitted = false;
+  quizAnswers = {};
+  quizQuestions = shuffle(wrongWords);
+  const count = quizQuestions.length;
+  
+  let html = '<div class="card" style="margin-bottom:12px;border-left:3px solid var(--error);background:#fff5f5">' +
+    '<h3>🔁 Ôn lại ' + count + ' từ sai</h3></div>';
+  
+  quizQuestions.forEach((w, qi) => {
+    const others = shuffle(words.filter(o => o.id !== w.id)).slice(0, 3);
+    const opts = shuffle([w, ...others]);
+    let prompt = '';
+    let optionDisplay = '';
+    
+    if (quizMode === 'vn2en') {
+      prompt = w.meaning + (w.type ? ' (' + w.type + ')' : '');
+      opts.forEach((o, oi) => {
+        optionDisplay += '<label class="quiz-option" id="vqo' + qi + '_' + oi + '" data-word="' + o.word + '" onclick="selectVocabAnswer(' + qi + ',' + oi + ',\'' + o.word.replace(/'/g,'\\\'') + '\')">' +
+          String.fromCharCode(65+oi) + '. ' + o.word + ' <span class="ipa">' + o.ipa + '</span></label>';
+      });
+    } else if (quizMode === 'en2vn') {
+      prompt = '<strong>' + w.word + '</strong> <span class="ipa">' + w.ipa + '</span>';
+      opts.forEach((o, oi) => {
+        optionDisplay += '<label class="quiz-option" id="vqo' + qi + '_' + oi + '" data-word="' + o.word + '" onclick="selectVocabAnswer(' + qi + ',' + oi + ',\'' + o.word.replace(/'/g,'\\\'') + '\')">' +
+          String.fromCharCode(65+oi) + '. ' + o.meaning + '</label>';
+      });
+    } else {
+      prompt = '<span style="font-size:20px;font-family:monospace">' + w.ipa + '</span>';
+      opts.forEach((o, oi) => {
+        optionDisplay += '<label class="quiz-option" id="vqo' + qi + '_' + oi + '" data-word="' + o.word + '" onclick="selectVocabAnswer(' + qi + ',' + oi + ',\'' + o.word.replace(/'/g,'\\\'') + '\')">' +
+          String.fromCharCode(65+oi) + '. ' + o.word + '</label>';
+      });
+    }
+    
+    html += '<div class="card" id="vq' + qi + '" data-correct="' + w.word + '">' +
+      '<strong>Câu ' + (qi+1) + '/' + count + ':</strong> ' + prompt +
+      '<div style="margin-top:8px">' + optionDisplay + '</div></div>';
+  });
+  
+  html += '<div style="text-align:center;margin:20px 0">' +
+    '<button class="btn btn-primary" id="vocabSubmitBtn" onclick="submitVocabQuiz()" style="padding:14px 48px;font-size:16px">📩 NỘP BÀI</button></div>' +
+    '<div id="vocabResult"></div>';
+  document.getElementById('tabContent').innerHTML = html;
 }
 
 renderSidebar();
