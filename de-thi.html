@@ -352,7 +352,7 @@ function loadExam(key) {
       if (pKey === 'passage1' && passages.word_bank && passages.word_bank.length > 0) {
         html += '<div class="word-bank" id="wordBank"><span class="word-bank-label">📦 Từ cho sẵn:</span>';
         passages.word_bank.forEach((w, wi) => {
-          html += '<span class="wb-word" id="wb' + wi + '" onclick="pickWord(' + wi + ','' + w.replace(/'/g, "\'") + '')">'+w+'</span>';
+          html += '<span class="wb-word" id="wb' + wi + '" data-word="' + w.replace(/"/g, '&quot;') + '" onclick="pickWord(' + wi + ', this.dataset.word)">'+w+'</span>';
         });
         html += '</div>';
       }
